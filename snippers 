@@ -1,0 +1,15 @@
+<ButtonRed
+      text='Button'
+      />
+      <ButtonWhite
+      text='Button'
+      />
+      <TitleBig
+      title='DIT IS EEN TITLE'
+      />
+      <ButtonRedBig
+      text='Big Button'
+      />
+      <ButtonWhiteBig
+      text='Big Button'
+      />

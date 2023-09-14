@@ -1,20 +1,54 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import * as React from 'react';
+import { Text, View, Button } from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import Login from './screens/LoginScreen';
+import Explore from './screens/ExploreScreen';
+import Search from './screens/SearchScreen';
 
-export default function App() {
+function LoginScreen({ navigation }) {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
+    <View style={{ flex: 2, arginTop: 15}}>
+      <Login/>
+      <Button
+        title="Ga naar Explore"
+        onPress={() => {
+          /* 1. Navigate to the Details route with params */
+          navigation.navigate('Explore', {
+          });
+        }}
+      />
     </View>
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+function ExploreScreen({ route, navigation }) {
+  return (
+    <View>
+      <Explore/>
+      <Button title="terug" onPress={() => navigation.goBack()} />
+    </View>
+  );
+}
+
+function SearchScreen({ route, navigation }) {
+  return (
+    <View >
+      <Search/>
+    </View>
+  );
+}
+
+const Stack = createNativeStackNavigator();
+
+export default function App() {
+  return (
+    <NavigationContainer>
+      <Stack.Navigator>
+        <Stack.Screen name="Login" options={{ headerShown: false }} component={LoginScreen} />
+        <Stack.Screen name="Explore" options={{ headerShown: false }} component={ExploreScreen} />
+        <Stack.Screen name="Search" options={{ headerShown: false }} component={SearchScreen} />
+      </Stack.Navigator>
+    </NavigationContainer>
+  );
+}
